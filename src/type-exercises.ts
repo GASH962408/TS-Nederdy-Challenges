@@ -31,7 +31,6 @@ type AdminPrivilegue = {
     name: string
     active: boolean
     privilege: symbol
-
 }
 
 type NormalUser = OmitByType<AdminPrivilegue, symbol>
@@ -66,12 +65,12 @@ type If<condition extends boolean, TrueArg, FalseArg> = condition extends true
 
 // 2.2 Add here your example:
 type Usertype<IsPremium extends boolean> = {
-    name: string;
-    type: If<IsPremium, "premium", "normal">;
-};
+    name: string
+    type: If<IsPremium, 'premium', 'normal'>
+}
 
-type UserPremium = Usertype<true>; // type: "premium"
-type UserNormal = Usertype<false>; // type: "normal"
+type UserPremium = Usertype<true> // type: "premium"
+type UserNormal = Usertype<false> // type: "normal"
 
 /**
  * 2.3 This type is very useful to change privileges among users using just one type:
@@ -156,9 +155,9 @@ type MyReturnType<T> = T extends (...args: any[]) => infer R ? R : never
 function getuserinfo(id: number) {
     return {
         id,
-        name: "Gustavo",
+        name: 'Gustavo',
         active: true,
-    };
+    }
 }
 
 type InfoUser = MyReturnType<typeof getuserinfo>
@@ -169,7 +168,6 @@ type InfoUser = MyReturnType<typeof getuserinfo>
      active: boolean;
     }
 */
-
 
 /**
  * Exercise #5: Extract the type inside a wrapped type like `Promise`.
@@ -189,11 +187,12 @@ type InfoUser = MyReturnType<typeof getuserinfo>
 type MyAwaited<T> = T extends Promise<infer U> ? U : null
 
 // 5.2 Add here your example:
-async function obtainName(): Promise<string> { //This will simulate an API call
-    return "Alonso";
+async function obtainName(): Promise<string> {
+    //This will simulate an API call
+    return 'Alonso'
 }
 
-type ResultInfo = MyAwaited<ReturnType<typeof obtainName>>;
+type ResultInfo = MyAwaited<ReturnType<typeof obtainName>>
 /**5.3 The ResulInfo will return "string" very useful to obtain 
  * which type of data we are calling from an API.
 /*
@@ -220,7 +219,7 @@ type ResultInfo = MyAwaited<ReturnType<typeof obtainName>>;
  */
 
 // 6.1 Add here your solution:
-type RequiredByKeys<T, K extends keyof T> = T &
+type RequiredByKeys<T, K extends keyof T = keyof T> = T &
 { [Prop in K]-?: T[Prop] } extends infer Combined
     ? {
         [Prop in keyof Combined]: Combined[Prop]
@@ -229,10 +228,10 @@ type RequiredByKeys<T, K extends keyof T> = T &
 
 // 6.2 Add here your example:
 interface FormContact {
-    name?: string;
-    email?: string;
-    phone?: string;
-  }
+    name?: string
+    email?: string
+    phone?: string
+}
 type Validform = RequiredByKeys<FormContact, 'name'>
 /**
  * 6.3 This will return type
