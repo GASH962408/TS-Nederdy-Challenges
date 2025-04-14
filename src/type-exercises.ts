@@ -78,8 +78,17 @@ type IsFalse = If<false, "Yes", "No">//this wil return type IsFalse = "No"
  */
 
 // Add here your solution
-
+type MyReadonly<T> = {
+    readonly [K in keyof T]: T[K];
+}
 // Add here your example
+type plants = {
+    name: string,
+    water: boolean,
+    sunlight: boolean
+}
+
+type MyReadonlyplant = MyReadonly<plants>//this will return type MyReadonlyplant = {readonly name: string;readonly water: boolean;readonly sunlight: boolean}
 
 /**
  * Exercise #4: Recreate the built-in `ReturnType<T>` utility type without using it.
