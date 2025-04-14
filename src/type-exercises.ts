@@ -31,7 +31,9 @@ type example1 = {
     active: boolean;
 }
 
-type OmitNumber = OmitByType<example1, number>;
+type OmitNumber = OmitByType<example1, number>; //this wil return type OmitNumber = {name: string;active: boolean}
+  
+
 /**
  * Exercise #2: Implement the utility type `If<C, T, F>`, which evaluates a condition `C`
  * and returns one of two possible types:
@@ -48,8 +50,10 @@ type OmitNumber = OmitByType<example1, number>;
  */
 
 // Add here your solution
-
+type If<condition extends boolean,TrueArg,FalseArg> = condition extends true? TrueArg:FalseArg
 // Add here your example
+type IsTrue = If<true, "Yes", "No">;//this wil return type IsTrue = "Yes"
+type IsFalse = If<false, "Yes", "No">//this wil return type IsFalse = "No"
 
 /**
  * Exercise #3: Recreate the built-in `Readonly<T>` utility type without using it.
