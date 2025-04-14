@@ -22,14 +22,14 @@
 
 // 1.1 Add here your solution:
 type OmitByType<Type, Property> = {
-    [K in keyof Type as Type[K] extends Property ? never : K]: Type[K]
+  [K in keyof Type as Type[K] extends Property ? never : K]: Type[K]
 }
 
 // 1.2 Add here your example:
 type example1 = {
-    id: number
-    name: string
-    active: boolean
+  id: number
+  name: string
+  active: boolean
 }
 
 type OmitNumber = OmitByType<example1, number>
@@ -38,7 +38,6 @@ type OmitNumber = OmitByType<example1, number>
  *  type OmitNumber = {
  * name: string;
  * active: boolean}
-
 
 /**
  * Exercise #2: Implement the utility type `If<C, T, F>`, which evaluates a condition `C`
@@ -57,8 +56,8 @@ type OmitNumber = OmitByType<example1, number>
 
 // 2.1 Add here your solution:
 type If<condition extends boolean, TrueArg, FalseArg> = condition extends true
-    ? TrueArg
-    : FalseArg
+  ? TrueArg
+  : FalseArg
 // 2.2 Add here your example:
 type IsTrue = If<true, 'Yes', 'No'> //this wil return type IsTrue = "Yes"
 type IsFalse = If<false, 'Yes', 'No'> //this wil return type IsFalse = "No"
@@ -87,13 +86,13 @@ type IsFalse = If<false, 'Yes', 'No'> //this wil return type IsFalse = "No"
 
 // 3.1 Add here your solution
 type MyReadonly<T> = {
-    readonly [K in keyof T]: T[K]
+  readonly [K in keyof T]: T[K]
 }
 // 3.2 Add here your example
 type plants = {
-    name: string
-    water: boolean
-    sunlight: boolean
+  name: string
+  water: boolean
+  sunlight: boolean
 }
 
 type MyReadonlyplant = MyReadonly<plants>
@@ -129,7 +128,7 @@ type MyReturnType<T> = T extends (...args: any[]) => infer R ? R : never
 
 // 4.2 Add here your example:
 function sumar(a: number, b: number): number {
-    return a + b
+  return a + b
 }
 
 type Resultado = MyReturnType<typeof sumar>
@@ -158,8 +157,8 @@ type MyAwaited<T> = T extends Promise<infer U> ? U : null
 type IhaveaPromise = Promise<string>
 type IdonthaveaPromise = 3
 
-type Result1 = MyAwaited<IhaveaPromise> // This will return the promise number
-type Result2 = MyAwaited<IdonthaveaPromise> // This will return null since there is no promise
+type Result1 = MyAwaited<IhaveaPromise> // This will return the promise type string.
+type Result2 = MyAwaited<IdonthaveaPromise> // This will return null since there is no promise.
 
 /**
  * Exercise 6: Create a utility type `RequiredByKeys<T, K>` that makes specific keys of `T` required.
@@ -184,17 +183,17 @@ type Result2 = MyAwaited<IdonthaveaPromise> // This will return null since there
 
 // 6.1 Add here your solution:
 type RequiredByKeys<T, K extends keyof T> = T &
-{ [Prop in K]-?: T[Prop] } extends infer Combined
-    ? {
-        [Prop in keyof Combined]: Combined[Prop]
+  { [Prop in K]-?: T[Prop] } extends infer Combined
+  ? {
+      [Prop in keyof Combined]: Combined[Prop]
     }
-    : never
+  : never
 
 // 6.2 Add here your example:
 interface ExampleUser {
-    name: string
-    age?: number
-    address?: string
+  name: string
+  age?: number
+  address?: string
 }
 type newExample = RequiredByKeys<ExampleUser, 'name'>
 /**

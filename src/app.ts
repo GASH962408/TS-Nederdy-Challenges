@@ -43,6 +43,7 @@ export function getTemperatureSummary(
   const temperatures = result.map((r) => r.temperature)
   const high = Math.max(...temperatures)
   const low = Math.min(...temperatures)
-  const average = temperatures.reduce((acc, temp) => acc + temp, 0) / temperatures.length
+  const average =
+    temperatures.reduce((acc, temp) => acc + temp, 0) / temperatures.length
   return { first, last, high, low, average }
 }
