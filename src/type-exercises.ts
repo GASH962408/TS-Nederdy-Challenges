@@ -134,8 +134,15 @@ type Resultado = MyReturnType<typeof sumar>//this will return type Resultado = n
  */
 
 // Add here your solution
+type MyAwaited<T> = T extends Promise<infer U> ? U : null;
 
 // Add here your example
+type IhaveaPromise = Promise<string>;
+type IdonthaveaPromise = 3;
+
+type Result1 = MyAwaited<IhaveaPromise>; // This will return the promise number
+type Result2 = MyAwaited<IdonthaveaPromise>;  // This will return null since there is no promise
+
 
 /**
  * Exercise 6: Create a utility type `RequiredByKeys<T, K>` that makes specific keys of `T` required.
