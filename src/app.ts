@@ -13,14 +13,22 @@ interface TemperatureSummary {
   average: number
 }
 
+
+
 export function processReadings(readings: TemperatureReading[]): void {
   // add here your code
+  console.log("Process readings...")
+  readings.forEach(reading => {readings.push(reading)})
 }
+
+const readings: TemperatureReading [] =[]
+
 
 export function getTemperatureSummary(
   date: Date,
   city: string,
 ): TemperatureSummary | null {
   //add here your code
+  
   return null
 }
