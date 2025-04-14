@@ -32,7 +32,7 @@ type example1 = {
 }
 
 type OmitNumber = OmitByType<example1, number>; //this wil return type OmitNumber = {name: string;active: boolean}
-  
+
 
 /**
  * Exercise #2: Implement the utility type `If<C, T, F>`, which evaluates a condition `C`
@@ -50,7 +50,7 @@ type OmitNumber = OmitByType<example1, number>; //this wil return type OmitNumbe
  */
 
 // Add here your solution
-type If<condition extends boolean,TrueArg,FalseArg> = condition extends true? TrueArg:FalseArg
+type If<condition extends boolean, TrueArg, FalseArg> = condition extends true ? TrueArg : FalseArg
 // Add here your example
 type IsTrue = If<true, "Yes", "No">;//this wil return type IsTrue = "Yes"
 type IsFalse = If<false, "Yes", "No">//this wil return type IsFalse = "No"
@@ -109,8 +109,15 @@ type MyReadonlyplant = MyReadonly<plants>//this will return type MyReadonlyplant
  */
 
 // Add here your solution
+type MyReturnType<T> =
+    T extends (...args: any[]) => infer R ? R : never;
 
 // Add here your example
+function sumar(a: number, b: number): number {
+    return a + b;
+}
+
+type Resultado = MyReturnType<typeof sumar>//this will return type Resultado = number
 
 /**
  * Exercise #5: Extract the type inside a wrapped type like `Promise`.
